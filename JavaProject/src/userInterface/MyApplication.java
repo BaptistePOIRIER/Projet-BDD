@@ -73,7 +73,7 @@ public class MyApplication {
 				lblNewLabel_1.setText("Bienvenue : " + s);
 			}
 		});
-		btnNewButton.setBounds(247, 147, 171, 41);
+		btnNewButton.setBounds(221, 158, 171, 41);
 		panel.add(btnNewButton);
 	}
 }

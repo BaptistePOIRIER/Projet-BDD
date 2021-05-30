@@ -8,9 +8,9 @@ public class Agence {
     private String coordonnees_GPS;
     private int max_vehicule;
     
-    
-    public Agence(int id_agence, String nom, String telephone, String adresse, String coordonnees_GPS,
+	public Agence(int id_agence, String nom, String telephone, String adresse, String coordonnees_GPS,
 			int max_vehicule) {
+		super();
 		this.id_agence = id_agence;
 		this.nom = nom;
 		this.telephone = telephone;
