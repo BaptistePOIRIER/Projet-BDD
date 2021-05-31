@@ -5,16 +5,17 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DataAccess {
 	Connection conn;
+	private String url = "JDBC:MYSQL://localhost/rentcar";
+	private String username = "root";
+	private String password = "secret";
 	
-	public DataAccess(String url, String usr, String pas) {
+	public DataAccess() {
 		try {
-			this.conn = DriverManager.getConnection(url, usr, pas);
-			System.out.println("Connection successful!");
+			this.conn = DriverManager.getConnection(this.url,this.username , this.password);
+			System.out.println("Connection successfull!");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -31,7 +32,31 @@ public class DataAccess {
 		}
 	}
 	
-	public void getEmploye() {
+	public boolean login(String login, String password) {
+		try {
+			Statement s = this.conn.createStatement();
+			String sql = "SELECT employe.id_personne,is_conseiller,nom,prénom FROM EMPLOYE INNER JOIN personne ON employe.id_personne = personne.id_personne WHERE login='" + login + "' AND mot_de_passe='" + password + "';";
+			
+			ResultSet rs = s.executeQuery(sql);
+			
+			if(rs.next()) {
+				System.out.println("Login successfull!");
+				Session.is_logged_in = true;
+				Session.employe_id = rs.getInt("id_personne");
+				Session.is_conseiller = rs.getInt("is_conseiller");
+				Session.nom = rs.getString("nom");
+				Session.prenom = rs.getString("prénom");
+				return true;
+			}else {
+				System.out.println("Login failed!");
+				return false;
+			}
+		}
+			catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		
+		}
+		return false;
 	}
 }
