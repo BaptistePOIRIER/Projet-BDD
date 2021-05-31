@@ -179,9 +179,18 @@ public class DashboardRessources {
 		JButton btnNewButton_1_1_1 = new JButton("Supprimer");
 		btnNewButton_1_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Vehicule vehicule = (Vehicule) DLM.get(list.getSelectedIndex());
-				DataAccess conn = new DataAccess();
-				conn.removeRessources(vehicule.getImmatriculation());
+				if(list.getSelectedIndex() == -1) {
+					JOptionPane.showMessageDialog(frame, "Please select a row");
+				}
+				else {
+					Vehicule vehicule = (Vehicule) DLM.get(list.getSelectedIndex());
+					DataAccess conn = new DataAccess();
+					if(conn.removeRessources(vehicule.getImmatriculation())) {
+						
+					}else {
+						JOptionPane.showMessageDialog(frame, "Please select a valid row");
+					}
+				}
 			}
 		});
 		btnNewButton_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));

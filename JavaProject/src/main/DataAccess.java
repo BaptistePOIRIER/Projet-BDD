@@ -103,8 +103,18 @@ public class DataAccess {
 		return false;
 	}
 
-	public void removeRessources(String immatriculation) {
-		
+	public boolean removeRessources(String immatriculation) {
+		try {
+			Statement s = this.conn.createStatement();
+			String sql = "DELETE FROM `rentcar`.`vehicule` WHERE (`immatriculation` = '" + immatriculation + "');";
+			s.executeUpdate(sql);
+			return true;
+		}
+			catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 		
 	}
 }
