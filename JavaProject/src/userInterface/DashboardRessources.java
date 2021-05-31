@@ -22,6 +22,8 @@ import javax.swing.SwingConstants;
 
 import main.DataAccess;
 import main.Session;
+import main.Vehicule;
+
 import javax.swing.JList;
 import javax.swing.JRadioButton;
 import javax.swing.AbstractListModel;
@@ -108,6 +110,9 @@ public class DashboardRessources {
 		list.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		list.setBounds(229, 105, 347, 204);
 		panel.add(list);
+		DataAccess conn = new DataAccess();
+		DefaultListModel DLM = conn.getRessources("", 3);
+		list.setModel(DLM);
 		
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("Vehicule disponible");
 		rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -172,6 +177,13 @@ public class DashboardRessources {
 		panel.add(btnNewButton_1_1);
 		
 		JButton btnNewButton_1_1_1 = new JButton("Supprimer");
+		btnNewButton_1_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Vehicule vehicule = (Vehicule) DLM.get(list.getSelectedIndex());
+				DataAccess conn = new DataAccess();
+				conn.removeRessources(vehicule.getImmatriculation());
+			}
+		});
 		btnNewButton_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnNewButton_1_1_1.setBounds(467, 319, 97, 34);
 		panel.add(btnNewButton_1_1_1);

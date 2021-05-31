@@ -32,5 +32,9 @@ public class Vehicule {
 				+ ", carburant=" + carburant + ", id_agence=" + id_agence + ", id_categorie=" + id_categorie + "]";
 	}
 
+	public String getImmatriculation() {
+		return immatriculation;
+	}
+
     
 }

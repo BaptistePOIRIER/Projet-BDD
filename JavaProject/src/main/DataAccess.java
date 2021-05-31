@@ -88,17 +88,23 @@ public class DataAccess {
 		return null;
 	}
 	
-	public void addRessource(String immatriculation, String marque, String modele, int kilometrage, int boite_auto,
+	public boolean addRessource(String immatriculation, String marque, String modele, int kilometrage, int boite_auto,
 		int climatisation, String carburant, int id_agence, int id_categorie) {
 		try {
 			Statement s = this.conn.createStatement();
 			String sql = "INSERT INTO `rentcar`.`vehicule` (`immatriculation`, `marque`, `modele`, `kilometrage`, `boite_auto`, `climatisation`, `carburant`, `id_agence`, `id_categorie`) VALUES ('" + immatriculation + "', '" + marque + "', '" + modele + "', '" + kilometrage + "', '" + boite_auto + "', '" + climatisation + "', '" + carburant + "', '" + id_agence + "', '" + id_categorie + "');";
-			ResultSet rs = s.executeQuery(sql);
+			s.executeUpdate(sql);
+			return true;
 		}
 			catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		
 		}
+		return false;
+	}
+
+	public void removeRessources(String immatriculation) {
+		
+		
 	}
 }

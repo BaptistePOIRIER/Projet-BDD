@@ -202,10 +202,10 @@ public class AddRessources {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataAccess conn = new DataAccess();
-				String immatriculation = lblNewLabel_1_3_1.getText();
-			    String marque = lblNewLabel_1_3_1_1.getText();
-			    String modele = lblNewLabel_1_3_1_1_1.getText();
-			    int kilometrage = Integer.parseInt(lblNewLabel_1_3_1_1_1_1_1.getText());
+				String immatriculation = textField.getText();
+			    String marque = textField_1.getText();
+			    String modele = textField_2.getText();
+			    int kilometrage = Integer.parseInt(textField_6.getText().trim());
 			    int boite_auto = 0;
 			    if(rdbtnBoiteAuto.isSelected()) {
 			    	boite_auto = 1;
@@ -214,11 +214,14 @@ public class AddRessources {
 			    if(rdbtnBoiteAuto.isSelected()) {
 			    	climatisation = 1;
 			    }
-			    String carburant = lblNewLabel_1_3_1_2.getText();
-			    int id_agence = Integer.parseInt(lblNewLabel_1_3_1_1_2.getText());
-			    int id_categorie = Integer.parseInt(lblNewLabel_1_3_1_1_1_1.getText());
-			    conn.addRessource(immatriculation, marque, modele, kilometrage, boite_auto, climatisation, carburant, id_agence, id_categorie);
-			    frame.dispose();
+			    String carburant = textField_5.getText();
+			    int id_agence = Integer.parseInt(textField_4.getText().trim());
+			    int id_categorie = Integer.parseInt(textField_3.getText().trim());
+			    if(conn.addRessource(immatriculation, marque, modele, kilometrage, boite_auto, climatisation, carburant, id_agence, id_categorie)) {
+			    	frame.dispose();
+			    }else {
+			    	JOptionPane.showMessageDialog(frame, "Invalid informations");
+			    }
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
