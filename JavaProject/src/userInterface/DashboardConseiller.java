@@ -83,7 +83,9 @@ public class DashboardConseiller {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-							
+				frame.dispose();
+				DashboardRessources window = new DashboardRessources();
+				window.frame.setVisible(true);
 			}
 		});
 		btnNewButton.setBounds(10, 125, 254, 75);
