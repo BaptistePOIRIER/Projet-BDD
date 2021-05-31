@@ -92,6 +92,13 @@ public class DashboardConseiller {
 		panel.add(btnNewButton);
 		
 		JButton btnGestionDesClients = new JButton("Gestion des Clients");
+		btnGestionDesClients.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				DashboardClients window = new DashboardClients();
+				window.frame.setVisible(true);
+			}
+		});
 		btnGestionDesClients.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnGestionDesClients.setBounds(322, 125, 254, 75);
 		panel.add(btnGestionDesClients);
@@ -102,5 +109,17 @@ public class DashboardConseiller {
 		lblNewLabel_1_3.setBounds(263, 10, 313, 23);
 		panel.add(lblNewLabel_1_3);
 		lblNewLabel_1_3.setText("Connect\u00E9 en tant que : " + Session.prenom + " " + Session.nom);
+		
+		JButton btnNewButton_1 = new JButton("Se d\u00E9connecter");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				LoginForm window = new LoginForm();
+				window.frame.setVisible(true);
+			}
+		});
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnNewButton_1.setBounds(143, 226, 297, 46);
+		panel.add(btnNewButton_1);
 	}
 }

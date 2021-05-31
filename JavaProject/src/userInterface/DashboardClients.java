@@ -28,10 +28,11 @@ import javax.swing.JList;
 import javax.swing.JRadioButton;
 import javax.swing.AbstractListModel;
 
-public class DashboardRessources {
+public class DashboardClients {
 
 	public JFrame frame;
 	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -40,7 +41,7 @@ public class DashboardRessources {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DashboardRessources window = new DashboardRessources();
+					DashboardClients window = new DashboardClients();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +53,7 @@ public class DashboardRessources {
 	/**
 	 * Create the application.
 	 */
-	public DashboardRessources() {
+	public DashboardClients() {
 		initialize();
 		
 		frame.addWindowListener(new WindowAdapter() {
@@ -82,7 +83,7 @@ public class DashboardRessources {
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Gestion des Ressources");
+		JLabel lblNewLabel = new JLabel("Gestion des Clients");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel.setBounds(191, 54, 228, 41);
@@ -95,14 +96,14 @@ public class DashboardRessources {
 		panel.add(lblNewLabel_1_3);
 		lblNewLabel_1_3.setText("Connect\u00E9 en tant que : " + Session.prenom + " " + Session.nom);
 		
-		JLabel lblNewLabel_1_3_1 = new JLabel("Marque :");
+		JLabel lblNewLabel_1_3_1 = new JLabel("Nom :");
 		lblNewLabel_1_3_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1_3_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_3_1.setBounds(10, 124, 69, 23);
+		lblNewLabel_1_3_1.setBounds(10, 105, 69, 23);
 		panel.add(lblNewLabel_1_3_1);
 		
 		textField = new JTextField();
-		textField.setBounds(76, 126, 74, 23);
+		textField.setBounds(76, 107, 74, 23);
 		panel.add(textField);
 		textField.setColumns(10);
 		
@@ -111,47 +112,39 @@ public class DashboardRessources {
 		list.setBounds(178, 105, 398, 204);
 		panel.add(list);
 		DataAccess conn = new DataAccess();
-		DefaultListModel DLM = conn.getRessources("", 3);
+		DefaultListModel DLM = conn.getClients("", 3, "");
 		list.setModel(DLM);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Vehicule disponible");
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Location en cours");
 		rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnNewRadioButton.setBounds(22, 173, 147, 23);
+		rdbtnNewRadioButton.setBounds(22, 208, 147, 23);
 		panel.add(rdbtnNewRadioButton);
 		
 		JRadioButton rdbtnTous = new JRadioButton("Tous");
 		rdbtnTous.setSelected(true);
 		rdbtnTous.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnTous.setBounds(22, 226, 147, 23);
+		rdbtnTous.setBounds(22, 233, 147, 23);
 		panel.add(rdbtnTous);
-		
-		JRadioButton rdbtnEnLocation = new JRadioButton("En location");
-		rdbtnEnLocation.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnEnLocation.setBounds(22, 200, 147, 23);
-		panel.add(rdbtnEnLocation);
 		
 		ButtonGroup group = new ButtonGroup();
 		group.add(rdbtnNewRadioButton);
-		group.add(rdbtnEnLocation);
 		group.add(rdbtnTous);
 		
 		JButton btnNewButton = new JButton("Rechercher");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DataAccess conn = new DataAccess();
-				String marque = textField.getText();
+				String nom = textField.getText();
+				String immatriculation = textField_1.getText();
 				int selectionType = 0;
 				if (rdbtnNewRadioButton.isSelected()) {
 					selectionType = 1;
 				}
-				if(rdbtnEnLocation.isSelected()) {
+				if(rdbtnTous.isSelected()) {
 					selectionType = 2;
 				}
-				if(rdbtnTous.isSelected()) {
-					selectionType = 3;
-				}
 				
-				DefaultListModel DLM = conn.getRessources(marque, selectionType);
+				DefaultListModel DLM = conn.getClients(nom, selectionType, immatriculation);
 				list.setModel(DLM);
 			}
 		});
@@ -163,7 +156,7 @@ public class DashboardRessources {
 		JButton btnNewButton_1 = new JButton("Ajouter");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddRessources window = new AddRessources();
+				AddClients window = new AddClients();
 				window.frame.setVisible(true);
 			}
 		});
@@ -208,5 +201,16 @@ public class DashboardRessources {
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnNewButton_2.setBounds(10, 10, 107, 34);
 		panel.add(btnNewButton_2);
+		
+		JLabel lblNewLabel_1_3_1_1 = new JLabel("Immatriculation :");
+		lblNewLabel_1_3_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_3_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1_3_1_1.setBounds(10, 148, 130, 23);
+		panel.add(lblNewLabel_1_3_1_1);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(33, 179, 107, 23);
+		panel.add(textField_1);
 	}
 }

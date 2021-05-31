@@ -27,9 +27,9 @@ public class Vehicule {
 	
 	@Override
 	public String toString() {
-		return "Vehicule [immatriculation=" + immatriculation + ", marque=" + marque + ", modele=" + modele
-				+ ", kilometrage=" + kilometrage + ", boite_auto=" + boite_auto + ", climatisation=" + climatisation
-				+ ", carburant=" + carburant + ", id_agence=" + id_agence + ", id_categorie=" + id_categorie + "]";
+		return immatriculation + " | " + marque + " | " + modele
+				+ " | " + kilometrage + ", boite_auto=" + boite_auto + ", climatisation=" + climatisation
+				+ " | " + carburant + ", id_agence=" + id_agence + ", id_categorie=" + id_categorie;
 	}
 
 	public String getImmatriculation() {

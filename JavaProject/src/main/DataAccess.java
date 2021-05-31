@@ -117,4 +117,31 @@ public class DataAccess {
 		return false;
 		
 	}
+	
+	public DefaultListModel getClients(String nom, int selectionType, String immatriculation) {
+		try {
+			Statement s = this.conn.createStatement();
+			String sql = "";
+			if (selectionType == 1) {
+				sql = "SELECT * FROM rentcar.client INNER JOIN personne on client.id_personne=personne.id_personne LEFT JOIN CONTRAT ON CLIENT.id_personne=CONTRAT.id_personne WHERE nom LIKE '%" + nom + "%' AND CONTRAT.immatriculation LIKE '%" + immatriculation + "%' ORDER BY nom;";
+			}else {
+				sql = "SELECT * FROM rentcar.client INNER JOIN personne on client.id_personne=personne.id_personne WHERE nom LIKE '%" + nom + "%' ORDER BY nom;";
+			}
+			ResultSet rs = s.executeQuery(sql);
+			DefaultListModel DLM = new DefaultListModel();
+			while(rs.next()) {
+				Personne personne = new Personne(rs.getInt("id_personne"), rs.getString("nom"), rs.getString("prénom"), rs.getString("email"), rs.getString("rue"), rs.getString("ville"), rs.getString("code_postal"), rs.getString("numero_telephone"));
+				DLM.addElement(personne);
+				System.out.println(personne.toString());
+			}
+			System.out.println(selectionType);
+			return DLM;
+		}
+			catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		
+		}
+		return null;
+	}
 }

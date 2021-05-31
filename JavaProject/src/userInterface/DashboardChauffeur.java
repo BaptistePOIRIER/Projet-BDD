@@ -85,5 +85,27 @@ public class DashboardChauffeur {
 		lblNewLabel_1_3.setBounds(263, 10, 313, 23);
 		panel.add(lblNewLabel_1_3);
 		lblNewLabel_1_3.setText("Connect\u00E9 en tant que : " + Session.prenom + " " + Session.nom);
+		
+		JButton btnNewButton = new JButton("Obtenir circuit");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnNewButton.setBounds(50, 174, 203, 105);
+		panel.add(btnNewButton);
+		
+		JButton btnVhiculesDplacer = new JButton("V\u00E9hicules \u00E0 d\u00E9placer");
+		btnVhiculesDplacer.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnVhiculesDplacer.setBounds(314, 174, 203, 105);
+		panel.add(btnVhiculesDplacer);
+		
+		JButton btnNewButton_1 = new JButton("Se d\u00E9connecter");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				LoginForm window = new LoginForm();
+				window.frame.setVisible(true);
+			}
+		});
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnNewButton_1.setBounds(156, 289, 248, 42);
+		panel.add(btnNewButton_1);
 	}
 }
